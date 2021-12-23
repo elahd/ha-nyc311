@@ -1,11 +1,9 @@
 {
   "domain": "civcalnyc",
-  "name": "NYC Civil Service Calendar (Trash, Schools, and Parking via 311)",
+  "name": "NYC Civil Service Calendar",
   "config_flow": true,
   "documentation": "https://www.home-assistant.io/integrations/civcalnyc",
-  "requirements": [
-    "civcalnyc==2021.12.post9"
-  ],
+  "requirements": [],
   "ssdp": [],
   "zeroconf": [],
   "homekit": {},
@@ -13,5 +11,6 @@
   "codeowners": [
     "@elahd"
   ],
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "version": "1.0.0"
 }
