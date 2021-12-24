@@ -1,4 +1,4 @@
-"""Config flow for NYC Civil Service Calendar integration."""
+"""Config flow for NYC 311 Public Services Calendar integration."""
 from __future__ import annotations
 
 import logging
@@ -39,11 +39,11 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     # return {"api_key": data["api_key"]}
     _LOGGER.debug("CivCalNYC successful authentication.")
 
-    return {"title": "NYC Civil Service Calendar"}
+    return {"title": "NYC 311 Public Services Calendar"}
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for NYC Civil Service Calendar."""
+    """Handle a config flow for NYC 311 Public Services Calendar."""
 
     VERSION = 1
 

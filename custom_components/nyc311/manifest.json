@@ -1,8 +1,8 @@
 {
-  "domain": "civcalnyc",
-  "name": "NYC Civil Service Calendar",
+  "domain": "nyc311",
+  "name": "NYC 311 Public Services Calendar",
   "config_flow": true,
-  "documentation": "https://www.home-assistant.io/integrations/civcalnyc",
+  "documentation": "https://www.github.com/elahd/ha-nyc311",
   "requirements": [],
   "ssdp": [],
   "zeroconf": [],

@@ -1,4 +1,4 @@
-"""The NYC Civil Service Calendar integration."""
+"""The NYC 311 Public Services Calendar integration."""
 from __future__ import annotations
 
 import logging
@@ -24,14 +24,14 @@ PLATFORMS: list[str] = ["sensor"]
 
 
 async def async_setup(hass: HomeAssistantType, config: dict):
-    """Set up the NYC Civil Service Calendar component."""
+    """Set up the NYC 311 Public Services Calendar component."""
 
     hass.data.setdefault(DOMAIN, {})
     return True
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up NYC Civil Service Calendar from a config entry."""
+    """Set up NYC 311 Public Services Calendar from a config entry."""
 
     if DOMAIN not in hass.data:
         # Print startup message
@@ -42,7 +42,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     async def async_update_data():
         try:
             async with async_timeout.timeout(10):
-                return await api.get_calendar(scrub=True)
+                return await api.get_calendar(
+                    [
+                        CivCalAPI.CalendarTypes.DAYS_AHEAD,
+                        CivCalAPI.CalendarTypes.NEXT_EXCEPTIONS,
+                    ],
+                    scrub=True,
+                )
         except CivCalAPI.InvalidAuth as err:
             raise ConfigEntryAuthFailed from err
         except CivCalAPI.CannotConnect as err:
