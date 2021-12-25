@@ -15,7 +15,7 @@ This component sets up the sensors in the table below for each of the three trac
 
 ---
 
-**✨ Entity names update every day at midnight to show the actual day of the week for which the sensor shows data. ✨**
+**✨🪄 Entity _names_ for sensors showing day-of-week status update automatically. 🪄✨**
 
 This lets you easily create a card showing statuses for the week ahead without having to parse in names for days of the week.\*\*
 
