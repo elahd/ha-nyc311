@@ -3,6 +3,7 @@
   "name": "NYC 311 Public Services Calendar",
   "config_flow": true,
   "documentation": "https://www.github.com/elahd/ha-nyc311",
+  "issue_tracker": "https://www.github.com/elahd/ha-nyc311/issues",
   "requirements": ["nyc311calendar==2021.12"],
   "ssdp": [],
   "zeroconf": [],
