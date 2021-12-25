@@ -4,6 +4,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from civcalnyc.civcalapi import CivCalAPI
 import voluptuous as vol
 
 from homeassistant import config_entries
@@ -12,9 +13,7 @@ from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
-from .const import DOMAIN
-
-from civcalnyc.civcalapi import CivCalAPI
+from .const import DOMAIN, INTEGRATION_NAME
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -39,7 +38,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     # return {"api_key": data["api_key"]}
     _LOGGER.debug("CivCalNYC successful authentication.")
 
-    return {"title": "NYC 311 Public Services Calendar"}
+    return {"title": INTEGRATION_NAME}
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):

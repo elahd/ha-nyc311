@@ -1,26 +1,25 @@
 """The NYC 311 Public Services Calendar integration."""
 from __future__ import annotations
 
+from datetime import timedelta
 import logging
 
-from datetime import timedelta
+import async_timeout
+from civcalnyc.civcalapi import CivCalAPI
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from homeassistant.exceptions import ConfigEntryAuthFailed
+from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.typing import HomeAssistantType
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-import async_timeout
-
-from civcalnyc.civcalapi import CivCalAPI
-
-from .const import DOMAIN, STARTUP_MESSAGE
+from .const import DOMAIN, INTEGRATION_NAME, STARTUP_MESSAGE
 
 _LOGGER = logging.getLogger(__name__)
 
-PLATFORMS: list[str] = ["sensor"]
+PLATFORMS: list[str] = ["sensor", "binary_sensor"]
 
 
 async def async_setup(hass: HomeAssistantType, config: dict):
@@ -60,6 +59,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         name=DOMAIN,
         update_method=async_update_data,
         update_interval=timedelta(minutes=30),
+    )
+
+    device_registry = dr.async_get(hass)
+
+    device_registry.async_get_or_create(
+        config_entry_id=entry.entry_id,
+        identifiers={(DOMAIN, "NYC 311 Public API")},
+        manufacturer="The City of New York",
+        name=INTEGRATION_NAME,
     )
 
     # Fetch initial data so we have data when entities subscribe

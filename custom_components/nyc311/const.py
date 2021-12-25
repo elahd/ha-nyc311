@@ -4,6 +4,7 @@ from civcalnyc.civcalapi import CivCalAPI
 
 DOMAIN = "nyc311"
 ISSUE_URL = "https://github.com/elahd/hass-nyc311/issues"
+INTEGRATION_NAME = "NYC 311 Public Services Calendar"
 
 STARTUP_MESSAGE = f"""
 ===================================================================
