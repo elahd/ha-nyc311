@@ -63,7 +63,7 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 [hacsbadge]: https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge
 [license-shield]: https://img.shields.io/github/license/elahd/ha-nyc311.svg?style=for-the-badge
 [maintenance-shield]: https://img.shields.io/badge/Maintainer-Elahd%20Bar--Shai%20%40elahd-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/elahd/ha-311.svg?style=for-the-badge
-[releases]: https://github.com/elahd/ha-311/releases
+[releases-shield]: https://img.shields.io/github/release/elahd/ha-nyc311.svg?style=for-the-badge
+[releases]: https://github.com/elahd/ha-nyc311/releases
 [commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg?style=for-the-badge
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
