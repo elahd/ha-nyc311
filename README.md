@@ -1,3 +1,4 @@
+![GitHub Workflow Status][builds]
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
@@ -67,3 +68,4 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 [releases]: https://github.com/elahd/ha-nyc311/releases
 [commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg?style=for-the-badge
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
+[builds]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg?style=for-the-badge
