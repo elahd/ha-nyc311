@@ -4,7 +4,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from civcalnyc.civcalapi import CivCalAPI
+from nyc311calendar.api import NYC311API
 import voluptuous as vol
 
 from homeassistant import config_entries
@@ -25,13 +25,13 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
     Data has the keys from STEP_USER_DATA_SCHEMA with values provided by the user.
     """
-    api = CivCalAPI(async_get_clientsession(hass), data["api_key"])
+    api = NYC311API(async_get_clientsession(hass), data["api_key"])
 
     try:
-        await api.get_calendar([CivCalAPI.CalendarTypes.NEXT_EXCEPTIONS])
-    except CivCalAPI.InvalidAuth as error:
+        await api.get_calendar([NYC311API.CalendarTypes.NEXT_EXCEPTIONS])
+    except NYC311API.InvalidAuth as error:
         raise InvalidAuth from error
-    except CivCalAPI.CannotConnect as error:
+    except NYC311API.CannotConnect as error:
         raise CannotConnect from error
 
     # Return info that you want to store in the config entry.

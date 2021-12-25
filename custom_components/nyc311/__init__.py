@@ -5,7 +5,7 @@ from datetime import timedelta
 import logging
 
 import async_timeout
-from civcalnyc.civcalapi import CivCalAPI
+from nyc311calendar.api import NYC311API
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
@@ -36,21 +36,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # Print startup message
         _LOGGER.info(STARTUP_MESSAGE)
 
-    api = CivCalAPI(async_get_clientsession(hass), entry.data["api_key"])
+    api = NYC311API(async_get_clientsession(hass), entry.data["api_key"])
 
     async def async_update_data():
         try:
             async with async_timeout.timeout(10):
                 return await api.get_calendar(
                     [
-                        CivCalAPI.CalendarTypes.DAYS_AHEAD,
-                        CivCalAPI.CalendarTypes.NEXT_EXCEPTIONS,
+                        NYC311API.CalendarTypes.DAYS_AHEAD,
+                        NYC311API.CalendarTypes.NEXT_EXCEPTIONS,
                     ],
                     scrub=True,
                 )
-        except CivCalAPI.InvalidAuth as err:
+        except NYC311API.InvalidAuth as err:
             raise ConfigEntryAuthFailed from err
-        except CivCalAPI.CannotConnect as err:
+        except NYC311API.CannotConnect as err:
             raise UpdateFailed(f"Error communicating with API: {err}")
 
     coordinator = DataUpdateCoordinator(

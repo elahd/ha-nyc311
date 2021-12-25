@@ -2,7 +2,7 @@
 import logging
 import re
 
-from civcalnyc.civcalapi import CivCalAPI
+from nyc311calendar.api import NYC311API
 
 from homeassistant import core
 from homeassistant.components.sensor import SensorEntity
@@ -30,9 +30,9 @@ async def async_setup_platform(
     # Add next exception sensors
     async_add_entities(
         (
-            CivCalNYC_NextExceptionSensor(coordinator, next_exc_svc, next_exc_data)
+            NYC311_NextExceptionSensor(coordinator, next_exc_svc, next_exc_data)
             for next_exc_svc, next_exc_data in coordinator.data[
-                CivCalAPI.CalendarTypes.NEXT_EXCEPTIONS
+                NYC311API.CalendarTypes.NEXT_EXCEPTIONS
             ].items()
         ),
         True,
@@ -49,13 +49,13 @@ async def async_setup_entry(
     await async_setup_platform(hass, entry, async_add_entities, discovery_info=None)
 
 
-class CivCalNYC_NextExceptionSensor(CoordinatorEntity, SensorEntity):
+class NYC311_NextExceptionSensor(CoordinatorEntity, SensorEntity):
     """Next Exception sensor."""
 
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
-        exc_svc: CivCalAPI.ServiceType,
+        exc_svc: NYC311API.ServiceType,
         exc_data: dict,
     ):
         """Pass coordinator to CoordinatorEntity."""
@@ -96,7 +96,7 @@ class CivCalNYC_NextExceptionSensor(CoordinatorEntity, SensorEntity):
     def state(self):
         """Return the state of the sensor."""
 
-        this_exc_data = self.coordinator.data[CivCalAPI.CalendarTypes.NEXT_EXCEPTIONS][
+        this_exc_data = self.coordinator.data[NYC311API.CalendarTypes.NEXT_EXCEPTIONS][
             self._exc_svc
         ]
 

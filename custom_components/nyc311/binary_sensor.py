@@ -10,7 +10,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 
 import re
-from civcalnyc.civcalapi import CivCalAPI
+from nyc311calendar.api import NYC311API
 
 from .const import DOMAIN, DAY_NAMES
 from .util import get_icon
@@ -30,11 +30,11 @@ async def async_setup_platform(
     # Add days ahead sensors. One sensor per service per day for 8 days = 24 sensors!
     async_add_entities(
         (
-            CivCalNYC_DaysAheadSensor(
+            NYC311_DaysAheadSensor(
                 coordinator, day_delta, day_dict["date"], svc, attrs
             )
             for day_delta, day_dict in coordinator.data[
-                CivCalAPI.CalendarTypes.DAYS_AHEAD
+                NYC311API.CalendarTypes.DAYS_AHEAD
             ].items()
             for svc, attrs in day_dict["services"].items()
         ),
@@ -52,19 +52,19 @@ async def async_setup_entry(
     await async_setup_platform(hass, entry, async_add_entities, discovery_info=None)
 
 
-class CivCalNYC_DaysAheadSensor(CoordinatorEntity, BinarySensorEntity):
+class NYC311_DaysAheadSensor(CoordinatorEntity, BinarySensorEntity):
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
         day_delta: int,
         day_date: date,
-        service: CivCalAPI.ServiceType,
+        service: NYC311API.ServiceType,
         attrs: dict,
     ):
         """Pass coordinator to CoordinatorEntity."""
         super().__init__(coordinator)
         self._delta: int = day_delta
-        self._svc: CivCalAPI.ServiceType = service
+        self._svc: NYC311API.ServiceType = service
         self._date: date = day_date
         self._attrs = self.parse_attrs(attrs)
         # Set name here to lock in entity ID with _in_x_days suffix.
@@ -111,7 +111,7 @@ class CivCalNYC_DaysAheadSensor(CoordinatorEntity, BinarySensorEntity):
     def is_on(self):
         """Return the state of the sensor."""
 
-        data = self.coordinator.data[CivCalAPI.CalendarTypes.DAYS_AHEAD][self._delta]
+        data = self.coordinator.data[NYC311API.CalendarTypes.DAYS_AHEAD][self._delta]
         self._attrs = self.parse_attrs(data["services"][self._svc])
         self._date = data["date"]
 

@@ -1,6 +1,6 @@
 {
 	"image": "ludeeus/container:integration-debian",
-	"name": "hass_civcalnyc",
+	"name": "ha-nyc311",
 	"appPort": [
 		"8123:8123"
 	],
