@@ -1,3 +1,4 @@
+[![GitHub Workflow Status][builds-shield]][builds]
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
@@ -15,7 +16,7 @@ This component sets up the sensors in the table below for each of the three trac
 
 ---
 
-**✨ Entity names update every day at midnight to show the actual day of the week for which the sensor shows data. ✨**
+**✨ Entity _names_ for sensors showing day-of-week status update automatically. ✨**
 
 That is, on a Tuesday, the `binary_sensor.nyc311_school_exception_in_2_days` sensor will be named `School Exception on Thursday`. On a Wednesday, that same sensor will be named `School Exception on Friday`. This lets you easily create a card showing statuses for the week ahead without having to parse in names for days of the week.
 
@@ -88,3 +89,5 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 [releases]: https://github.com/elahd/ha-nyc311/releases
 [commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg?style=for-the-badge
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
+[builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg?style=for-the-badge
+[builds]: https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml
