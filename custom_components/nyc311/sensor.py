@@ -18,13 +18,13 @@ from .util import get_icon
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_platform(
+async def async_setup_entry(
     hass: core.HomeAssistant,
     entry: ConfigEntry,
     async_add_entities,
     discovery_info=None,
 ):
-    """Set up the sensor platform and create a master device."""
+    """Setup entities using the sensor platform from this config entry."""
     coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
 
     # Add next exception sensors
@@ -37,16 +37,6 @@ async def async_setup_platform(
         ),
         True,
     )
-
-
-async def async_setup_entry(
-    hass: core.HomeAssistant,
-    entry: ConfigEntry,
-    async_add_entities,
-    discovery_info=None,
-):
-    """Set up the config entry."""
-    await async_setup_platform(hass, entry, async_add_entities, discovery_info=None)
 
 
 class NYC311_NextExceptionSensor(CoordinatorEntity, SensorEntity):

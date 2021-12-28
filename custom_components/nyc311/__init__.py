@@ -10,9 +10,8 @@ from nyc311calendar.api import NYC311API
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers import device_registry as dr
+from homeassistant.helpers import device_registry as dr, entity_registry as er
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.typing import HomeAssistantType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import DOMAIN, INTEGRATION_NAME, STARTUP_MESSAGE
@@ -22,19 +21,15 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS: list[str] = ["sensor", "binary_sensor"]
 
 
-async def async_setup(hass: HomeAssistantType, config: dict):
-    """Set up the NYC 311 Public Services Calendar component."""
-
-    hass.data.setdefault(DOMAIN, {})
-    return True
-
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up NYC 311 Public Services Calendar from a config entry."""
 
     if DOMAIN not in hass.data:
         # Print startup message
         _LOGGER.info(STARTUP_MESSAGE)
+
+    # Load data for domain. If not present, initlaize dict for this domain.
+    hass.data.setdefault(DOMAIN, {})
 
     api = NYC311API(async_get_clientsession(hass), entry.data["api_key"])
 

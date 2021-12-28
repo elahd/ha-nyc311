@@ -4,14 +4,12 @@
   "config_flow": true,
   "documentation": "https://www.github.com/elahd/ha-nyc311",
   "issue_tracker": "https://www.github.com/elahd/ha-nyc311/issues",
-  "requirements": ["nyc311calendar==2021.12"],
+  "requirements": ["nyc311calendar==2021.12.1"],
   "ssdp": [],
   "zeroconf": [],
   "homekit": {},
   "dependencies": [],
-  "codeowners": [
-    "@elahd"
-  ],
+  "codeowners": ["@elahd"],
   "iot_class": "cloud_polling",
-  "version": "1.0.0"
+  "version": "2012.12"
 }

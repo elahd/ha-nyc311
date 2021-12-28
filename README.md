@@ -17,35 +17,56 @@ This component sets up the sensors in the table below for each of the three trac
 
 **✨ Entity names update every day at midnight to show the actual day of the week for which the sensor shows data. ✨**
 
-This lets you easily create a card showing statuses for the week ahead without having to parse in names for days of the week.\*\*
+That is, on a Tuesday, the `binary_sensor.nyc311_school_exception_in_2_days` sensor will be named `School Exception on Thursday`. On a Wednesday, that same sensor will be named `School Exception on Friday`. This lets you easily create a card showing statuses for the week ahead without having to parse in names for days of the week.
 
 ---
 
 This example is for schools as rendered on a Tuesday.
 
-| Entity Name                      | Entity ID                             | Sensor Type     | Sensor Class | Description                                             |
-| -------------------------------- | ------------------------------------- | --------------- | ------------ | ------------------------------------------------------- |
-| Next School Closure<sup>\*</sup> | sensor.next_school_closure            | `sensor`        | `date`       | Next date on which school is closed. Excludes weekends. |
-| School Yesterday<sup>\*</sup>    | binary_sensor.nyc311_school_yesterday | `binary_sensor` | `running`    | School status yesterday, just in case you missed it.    |
-| School Today<sup>\*</sup>        | binary_sensor.nyc311_school_today     | `binary_sensor` | `running`    | School status today.                                    |
-| School Tomorrow<sup>\*</sup>     | binary_sensor.nyc311_school_tomorrow  | `binary_sensor` | `running`    | School status tomorrow.                                 |
-| School on Thursday               | binary_sensor.nyc311_school_in_2_days | `binary_sensor` | `running`    | School status 2 days from now.                          |
-| School on Friday                 | binary_sensor.nyc311_school_in_3_days | `binary_sensor` | `running`    | School status 3 days from now.                          |
-| School on Saturday               | binary_sensor.nyc311_school_in_4_days | `binary_sensor` | `running`    | School status 4 days from now.                          |
-| School on Sunday                 | binary_sensor.nyc311_school_in_5_days | `binary_sensor` | `running`    | School status 5 days from now.                          |
-| School on Monday                 | binary_sensor.nyc311_school_in_6_days | `binary_sensor` | `running`    | School status 6 days from now.                          |
+| Entity Name                             | Entity ID                                       | Sensor Type     | Sensor Class | Description                                             |
+| --------------------------------------- | ----------------------------------------------- | --------------- | ------------ | ------------------------------------------------------- |
+| Next School Exception<sup>\*</sup>      | sensor.next_school_exception                    | `sensor`        | `date`       | Next date on which school is closed. Excludes weekends. |
+| School Exception Yesterday<sup>\*</sup> | binary_sensor.nyc311_school_exception_yesterday | `binary_sensor` | `None`       | School status yesterday, just in case you missed it.    |
+| School Exception Today<sup>\*</sup>     | binary_sensor.nyc311_school_exception_today     | `binary_sensor` | `None`       | School status today.                                    |
+| School Exception Tomorrow<sup>\*</sup>  | binary_sensor.nyc311_school_exception_tomorrow  | `binary_sensor` | `None`       | School status tomorrow.                                 |
+| School Exception on Thursday            | binary_sensor.nyc311_school_exception_in_2_days | `binary_sensor` | `None`       | School status 2 days from now.                          |
+| School Exception on Friday              | binary_sensor.nyc311_school_exception_in_3_days | `binary_sensor` | `None`       | School status 3 days from now.                          |
+| School Exception on Saturday            | binary_sensor.nyc311_school_exception_in_4_days | `binary_sensor` | `None`       | School status 4 days from now.                          |
+| School Exception on Sunday              | binary_sensor.nyc311_school_exception_in_5_days | `binary_sensor` | `None`       | School status 5 days from now.                          |
+| School Exception on Monday              | binary_sensor.nyc311_school_exception_in_6_days | `binary_sensor` | `None`       | School status 6 days from now.                          |
 
 \* Entity name does _not_ change dynamically.
 
-In this example, on the following day, "School on Thursday" would be renamed "School on Friday", etc. Entity _IDs_ never change and are always named exactly as shown below.
+In this example, on the following day, "School Exception on Thursday" would be renamed "School Exception on Friday", etc. Entity _IDs_ never change and are always named exactly as shown below.
 
 ### Binary Sensors: True vs False
 
-The `binary_sensor`s are `running` sensors. This means that when the sensor is `on` or `True`, school is open, garbage is being collected, or alternate side parking rules are in effect. When the sensor is `off` or `False`, schools are closed and garbage collection or parking rules are suspended.
+The `binary_sensor`s are generic on/off binary sensors that show whether there is a service exception on a given day. This means that when the sensor is `on` or `True`, school is closed, garbage is not being collected, or alternate side parking rules are suspended. When the sensor is `off` or `False`, services are operating normally. Note that things like school closures on weekends are considered "normal" and will not be flagged as exceptions.
+
+Service icons have a slash through them when sensors are `on`. This may be counter-intuitive, but the goal is to show that there is no service on that day.
 
 ### Attributes
 
 Each sensor has state attributes that give you more detail to play with using Jinja or template sensors.
+
+#### Binary Sensors
+
+| Attribute Name  | Example Value                                                       | Notes                                                                                                                                                  |
+| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Reason          | New Year's Day                                                      | Blank when service is normal.                                                                                                                          |
+| Description     | Alternate side parking and meters are suspended for New Year's Day. |                                                                                                                                                        |
+| Status          | Suspended                                                           | Shows full status. For example, for schools, this will show "Closed" on weekends, even though this add-in doesn't mark weekend closures as exceptions. |
+| Routine closure | false                                                               | Shows true for "normal" service suspensions, such as school closures on weekends.                                                                      |
+| Service name    | Parking                                                             |                                                                                                                                                        |
+| Is exception    | true                                                                | Drives sensor on/off status.                                                                                                                           |
+
+#### Date Sensors
+
+| Attribute Name | Example Value                                                    | Notes              |
+| -------------- | ---------------------------------------------------------------- | ------------------ |
+| Reason Winter  | Recess                                                           |                    |
+| Description    | Public schools are closed for Winter Recess through December 31. | Shows full status. |
+| Status         | Closed                                                           |                    |
 
 ## Requirements
 
