@@ -59,7 +59,6 @@ Each sensor has state attributes that give you more detail to play with using Ji
 | Status          | Suspended                                                           | Shows full status. For example, for schools, this will show "Closed" on weekends, even though this add-in doesn't mark weekend closures as exceptions. |
 | Routine closure | false                                                               | Shows true for "normal" service suspensions, such as school closures on weekends.                                                                      |
 | Service name    | Parking                                                             |                                                                                                                                                        |
-| Is exception    | true                                                                | Drives sensor on/off status.                                                                                                                           |
 
 #### Date Sensors
 
