@@ -12,7 +12,8 @@
             "user": {
                 "data": {
                     "api_key": "NYC 311 Public API Key"
-                }
+                },
+                "description": "See https://github.com/elahd/ha-nyc311/wiki/Getting-an-API-Key for instructions on getting an API key."
             }
         }
     }
