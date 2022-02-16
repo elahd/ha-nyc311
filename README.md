@@ -3,6 +3,7 @@
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
 [![hacs][hacsbadge]][hacs]
+![HACS Installs][hacs-installs]
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
@@ -79,14 +80,15 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 **Component configuration is done via Home Assistant's integration's UI.** Enter your API key there during component setup.
 
 [buymecoffee]: https://www.buymeacoffee.com/elahd
-[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg?style=for-the-badge
+[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg
 [hacs]: https://github.com/hacs/integration
-[hacsbadge]: https://img.shields.io/badge/HACS-Default-41BDF5.svg?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/elahd/ha-nyc311.svg?style=for-the-badge
-[maintenance-shield]: https://img.shields.io/badge/Maintainer-Elahd%20Bar--Shai%20%40elahd-blue.svg?style=for-the-badge
-[releases-shield]: https://img.shields.io/github/release/elahd/ha-nyc311.svg?style=for-the-badge
+[hacsbadge]: https://img.shields.io/badge/HACS-Default-41BDF5.svg
+[license-shield]: https://img.shields.io/github/license/elahd/ha-nyc311.svg
+[maintenance-shield]: https://img.shields.io/badge/Maintainer-Elahd%20Bar--Shai%20%40elahd-blue.svg
+[releases-shield]: https://img.shields.io/github/release/elahd/ha-nyc311.svg
 [releases]: https://github.com/elahd/ha-nyc311/releases
-[commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg?style=for-the-badge
+[commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
-[builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg?style=for-the-badge
+[builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg
 [builds]: https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml
+[hacs-installs]: https://img.shields.io/endpoint?url=https%3A%2F%2Flauwbier.nl%2Fhacs%2Falarmdotcom
