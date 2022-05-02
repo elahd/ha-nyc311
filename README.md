@@ -8,6 +8,12 @@
 
 # NYC 311 Public Services Calendar
 
+-----------------------------------------
+-----------------------------------------
+If you started receiving errors from this integration in April/May 2022, you must update to v0.1 using the instructions in https://github.com/elahd/ha-nyc311/issues/4#issuecomment-1115119826.
+-----------------------------------------
+-----------------------------------------
+
 ## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
 
 ## Sensors 
