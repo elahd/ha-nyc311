@@ -1,3 +1,5 @@
+# NYC 311 Public Services Calendar
+
 [![GitHub Workflow Status][builds-shield]][builds]
 [![GitHub Release][releases-shield]][releases]
 [![GitHub Activity][commits-shield]][commits]
@@ -6,13 +8,13 @@
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
-# NYC 311 Public Services Calendar
+---
+---
 
------------------------------------------
------------------------------------------
-If you started receiving errors from this integration in April/May 2022, you must update to v0.1 using the instructions in https://github.com/elahd/ha-nyc311/issues/4#issuecomment-1115119826.
------------------------------------------
------------------------------------------
+If you started receiving errors from this integration in April/May 2022, you must update manually using the instructions in <https://github.com/elahd/ha-nyc311/issues/4#issuecomment-1115119826>.
+
+---
+---
 
 ## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
 
@@ -58,29 +60,30 @@ Each sensor has state attributes that give you more detail to play with using Ji
 
 #### Binary Sensors
 
-| Attribute Name  | Example Value                                                       | Notes                                                                                                                                                  |
-| --------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Reason          | New Year's Day                                                      | Blank when service is normal.                                                                                                                          |
-| Description     | Alternate side parking and meters are suspended for New Year's Day. |                                                                                                                                                        |
-| Status          | Suspended                                                           | Shows full status. For example, for schools, this will show "Closed" on weekends, even though this add-in doesn't mark weekend closures as exceptions. |
-| Routine closure | false                                                               | Shows true for "normal" service suspensions, such as school closures on weekends.                                                                      |
-| Service name    | Parking                                                             |                                                                                                                                                        |
+| Attribute Name | Example Value                                                       | Notes                                                                                                                                                                                |
+| -------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Reason         | New Year's Day                                                      | Blank when service is normal.                                                                                                                                                        |
+| Description    | Alternate side parking and meters are suspended for New Year's Day. |                                                                                                                                                                                      |
+| Status         | Suspended                                                           | Shows standardized service statuses. The API returns a mess of statuses. These statuses fit the standard as defined in the nyc311calendar Python module.                             |
+| Closure Type   | Exception                                                           | Shows "Exception" for special closures (holdays, etc.) and "Routine" for normal closures such as meter suspensions on Sundays. Field will be empty when service is running normally. |
+| Service name   | Parking                                                             |                                                                                                                                                                                      |
+| Date           | 2022-06-02                                                          |                                                                                                                                                                                      |
 
 #### Date Sensors
 
-| Attribute Name | Example Value                                                    | Notes              |
-| -------------- | ---------------------------------------------------------------- | ------------------ |
-| Reason Winter  | Recess                                                           |                    |
-| Description    | Public schools are closed for Winter Recess through December 31. | Shows full status. |
-| Status         | Closed                                                           |                    |
+| Attribute Name | Example Value                                                    | Notes                                                                                                                                                    |
+| -------------- | ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Reason         | Rosh Hashanah                                                    | Field will be empty when service is operating normally.                                                                                                  |
+| Description    | Public schools are closed for Winter Recess through December 31. | Shows full status.                                                                                                                                       |
+| Status         | Suspended                                                        | Shows standardized service statuses. The API returns a mess of statuses. These statuses fit the standard as defined in the nyc311calendar Python module. |
 
 ## Requirements
 
 You'll need an NYC API Portal developer account to use this library. It's free.
 
-1. Sign up at https://api-portal.nyc.gov/signup/.
-2. Log in, then subscribe to the "NYC 311 Public Developers" product at https://api-portal.nyc.gov/products?api=nyc-311-public-api. This subscription unlocks the calendar product.
-3. Get your API key at https://api-portal.nyc.gov/developer. Either key (primary/secondary) will work.
+1. Sign up at <https://api-portal.nyc.gov/signup/>.
+2. Log in, then subscribe to the "NYC 311 Public Developers" product at <https://api-portal.nyc.gov/products?api=nyc-311-public-api>. This subscription unlocks the calendar product.
+3. Get your API key at <https://api-portal.nyc.gov/developer>. Either key (primary/secondary) will work.
 
 **Component configuration is done via Home Assistant's integration's UI.** Enter your API key there during component setup.
 
