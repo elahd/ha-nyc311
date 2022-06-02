@@ -1,141 +1,160 @@
-from datetime import date, datetime
-import logging
+"""Binary sensor API entity."""
+from __future__ import annotations
 
-from typing import Any
+from datetime import date
+from datetime import datetime
+import logging
+from typing import Literal
 
 from homeassistant import core
-from homeassistant.core import callback
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers.update_coordinator import (
-    CoordinatorEntity,
-    DataUpdateCoordinator,
-)
+from homeassistant.helpers.entity import DeviceInfo
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.entity_platform import DiscoveryInfoType
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from nyc311calendar import CalendarDayEntry
+from nyc311calendar import CalendarType
+from nyc311calendar.services import Service
 
-import re
-from nyc311calendar.api import NYC311API
+from .base_device import BaseDevice
+from .const import DAY_NAMES
+from .const import DOMAIN
 
-from .const import DOMAIN, DAY_NAMES
-from .util import get_icon
-
-_LOGGER = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 
 async def async_setup_entry(
     hass: core.HomeAssistant,
     entry: ConfigEntry,
-    async_add_entities,
-    discovery_info=None,
-):
-    """Setup entities using the binary sensor platform from this config entry."""
+    async_add_entities: AddEntitiesCallback,  # pylint: disable=unused-argument
+    discovery_info: DiscoveryInfoType | None = None,  # pylint: disable=unused-argument
+) -> None:
+    """Set up entities using the binary sensor platform from this config entry."""
     coordinator: DataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
 
     # Add days ahead sensors. One sensor per service per day for 8 days = 24 sensors!
     async_add_entities(
         (
-            NYC311_DaysAheadSensor(coordinator, day_delta, day_dict["date"], svc, attrs)
-            for day_delta, day_dict in coordinator.data[
-                NYC311API.CalendarTypes.DAYS_AHEAD
+            DaysAheadSensor(
+                coordinator=coordinator,
+                day_delta_from_today=day_delta_from_today,
+                calendar_entry=calendar_entry,
+            )
+            for day_delta_from_today, day_attributes in coordinator.data[
+                CalendarType.DAYS_AHEAD
             ].items()
-            for svc, attrs in day_dict["services"].items()
+            for calendar_entry in day_attributes["services"].values()
         ),
         True,
     )
 
 
-class NYC311_DaysAheadSensor(CoordinatorEntity, BinarySensorEntity):
+class DaysAheadSensor(BaseDevice, BinarySensorEntity):  # type: ignore
+    """Sensor showing exceptions over next few days."""
+
+    NORMAL_EXCEPTIONS = [
+        Service.StandardizedStatusType.REMOTE,
+        Service.StandardizedStatusType.NORMAL_SUSPENDED,
+        Service.StandardizedStatusType.NORMAL_ACTIVE,
+    ]
+
+    _attr_device_info: DeviceInfo | None = {
+        "identifiers": {(DOMAIN, "NYC 311 Public API")}
+    }
+
+    _attr_force_update = True
+
     def __init__(
         self,
         coordinator: DataUpdateCoordinator,
-        day_delta: int,
-        day_date: date,
-        service: NYC311API.ServiceType,
-        attrs: dict,
+        day_delta_from_today: int,
+        calendar_entry: CalendarDayEntry,
     ):
         """Pass coordinator to CoordinatorEntity."""
-        super().__init__(coordinator)
-        self._delta: int = day_delta
-        self._svc: NYC311API.ServiceType = service
-        self._date: date = day_date
-        self._attrs = self.parse_attrs(attrs)
+        super().__init__(coordinator=coordinator, calendar_entry=calendar_entry)
+
+        self._delta_from_today: int = day_delta_from_today
+
         # Set name here to lock in entity ID with _in_x_days suffix.
-        self._name = "NYC311 {0}".format(
-            self.generate_name(self._attrs["service_name"], self._delta, self._date)
+        self._attr_name = f"NYC311 {self._generate_name(service_name=calendar_entry.service_profile.name,delta_from_today=self._delta_from_today,calendar_entry_date=calendar_entry.date)}"
+
+        self._attr_unique_id = (
+            self._generate_name(
+                service_name=calendar_entry.service_profile.name,
+                delta_from_today=self._delta_from_today,
+                calendar_entry_date=calendar_entry.date,
+            )
+            .lower()
+            .replace(" ", "_")
         )
 
-    @property
-    def device_info(self):
-        return {"identifiers": {(DOMAIN, "NYC 311 Public API")}}
+    def update_device_data(self) -> None:
+        """Update the entity when coordinator is updated."""
 
-    @property
-    def icon(self):
-        """Icon to use in the frontend."""
-        # return get_icon(
-        #     self._svc, self._attrs["is_exception"] or self._attrs["routine_closure"]
-        # )
-        return get_icon(self._svc, self._attrs["is_exception"])
-
-    @property
-    def unique_id(self):
-        """Return the entity id of the sensor."""
-        return re.sub(
-            " ",
-            "_",
-            self.generate_name(self._attrs["service_name"], self._delta, self._date),
-        ).lower()
-
-    @property
-    def name(self):
-        """Return the name of the sensor."""
-        return self._name
-
-    @property
-    def force_update(self):
-        """Return the name of the sensor."""
-        return True
-
-    @property
-    def is_on(self):
-        """Return the state of the sensor."""
-
-        data = self.coordinator.data[NYC311API.CalendarTypes.DAYS_AHEAD][self._delta]
-        self._attrs = self.parse_attrs(data["services"][self._svc])
-        self._date = data["date"]
+        self._calendar_entry: CalendarDayEntry = self.coordinator.data[
+            CalendarType.DAYS_AHEAD
+        ][self._delta_from_today]["services"][
+            self._calendar_entry.service_profile.service_type
+        ]
 
         # Set entity name in "Wednesday" format instead of "in_3_days" format on an ongoing basis.
         # Entity ID will stay in predictable "in_3_days" format.
-        self._name = self.generate_name(
-            self._attrs["service_name"], self._delta, self._date, True
+
+        self._attr_name = self._generate_name(
+            calendar_entry_date=self._calendar_entry.date,
+            service_name=self._calendar_entry.service_profile.name,
+            delta_from_today=self._delta_from_today,
+            day_of_week_fmt=True,
         )
 
-        # return (not self._attrs["is_exception"]) or (not self._attrs["routine_closure"])
-        return self._attrs["is_exception"]
-
-    @property
-    def extra_state_attributes(self):
-        return self._attrs
-
-    # Forces push of updated entity name to entity registry.
-    @callback
-    def sensor_state_updated(self, state: Any, **kwargs: Any) -> None:
-        """Handle state updates."""
-        self.async_write_ha_state()
-
-    def parse_attrs(self, data):
-        return {
-            "reason": data["exception_reason"],
-            "description": data["description"],
-            "status": data["status_name"],
-            "routine_closure": data["routine_closure"],
-            "service_name": data["service_name"],
-            "is_exception": data["is_exception"],
-        }
-
-    def generate_name(
-        self, svc_name: str, delta: int, day_date: date, day_of_week_fmt: bool = False
-    ):
-        if day_of_week_fmt and delta > 1:
-            day_name = datetime.combine(day_date, datetime.min.time()).strftime("on %A")
+        closure_type: Literal["Routine"] | Literal["Exception"] | None
+        if (
+            self._calendar_entry.status_profile.standardized_type
+            == Service.StandardizedStatusType.NORMAL_ACTIVE
+        ):
+            closure_type = None
+        elif (
+            self._calendar_entry.status_profile.standardized_type
+            in self.NORMAL_EXCEPTIONS
+        ):
+            closure_type = "Routine"
         else:
-            day_name = DAY_NAMES[delta]
-        return f"{svc_name} Exception {day_name}"
+            closure_type = "Exception"
+
+        self._attr_extra_state_attributes.update(
+            {
+                "service_name": self._calendar_entry.service_profile.name,
+                "closure_type": closure_type,
+                "date": self._calendar_entry.date.isoformat(),
+            }
+        )
+
+        self._attr_is_on = (
+            self._calendar_entry.status_profile.standardized_type
+            not in self.NORMAL_EXCEPTIONS
+        )
+
+        self._attr_icon = self._get_icon(
+            self._attr_extra_state_attributes["closure_type"] == "Exception",
+        )
+
+    @classmethod
+    def _generate_name(
+        cls,
+        service_name: str,
+        delta_from_today: int,
+        calendar_entry_date: date,
+        day_of_week_fmt: bool = False,  # True for name, False for unique ID.
+    ) -> str:
+        """Generate entity name and unique ID."""
+
+        if day_of_week_fmt and delta_from_today > 1:
+            # On Wednesday
+            day_name = datetime.combine(
+                calendar_entry_date, datetime.min.time()
+            ).strftime("on %A")
+        else:
+            # In 3 days
+            day_name = DAY_NAMES[delta_from_today]
+        return f"{service_name} Exception {day_name}"

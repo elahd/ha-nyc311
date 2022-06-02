@@ -1,6 +1,6 @@
 """Constants for the NYC 311 Calendar integration."""
 
-from nyc311calendar.api import NYC311API
+from nyc311calendar import ServiceType
 
 DOMAIN = "nyc311"
 ISSUE_URL = "https://github.com/elahd/hass-nyc311/issues"
@@ -23,9 +23,9 @@ If you have any issues with this you need to open an issue here:
 """
 
 SERVICE_ICONS = {
-    NYC311API.ServiceType.PARKING: "mdi:car",
-    NYC311API.ServiceType.SCHOOL: "mdi:bag-personal",
-    NYC311API.ServiceType.TRASH: "mdi:delete",
+    ServiceType.PARKING: "mdi:car",
+    ServiceType.SCHOOL: "mdi:bag-personal",
+    ServiceType.SANITATION: "mdi:delete",
 }
 
 DAY_NAMES = {

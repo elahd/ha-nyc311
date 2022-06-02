@@ -1,7 +1,3 @@
 {
-  "name": "NYC 311 Public Services Calendar",
-  "content_in_root": false,
-  "render_readme": true,
-  "domains": ["sensor", "binary_sensor"],
-  "country": ["US"]
+  "name": "NYC 311 Public Services Calendar"
 }
