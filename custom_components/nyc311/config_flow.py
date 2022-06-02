@@ -4,18 +4,19 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from nyc311calendar.api import NYC311API
-import voluptuous as vol
-
 from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from nyc311calendar import CalendarType
+from nyc311calendar import NYC311API
+import voluptuous as vol
 
-from .const import DOMAIN, INTEGRATION_NAME
+from .const import DOMAIN
+from .const import INTEGRATION_NAME
 
-_LOGGER = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 STEP_USER_DATA_SCHEMA = vol.Schema({vol.Required("api_key"): str})
 
@@ -28,7 +29,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
     api = NYC311API(async_get_clientsession(hass), data["api_key"])
 
     try:
-        await api.get_calendar([NYC311API.CalendarTypes.NEXT_EXCEPTIONS])
+        await api.get_calendar([CalendarType.NEXT_EXCEPTIONS])
     except NYC311API.InvalidAuth as error:
         raise InvalidAuth from error
     except NYC311API.CannotConnect as error:
@@ -36,12 +37,12 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
     # Return info that you want to store in the config entry.
     # return {"api_key": data["api_key"]}
-    _LOGGER.debug("CivCalNYC successful authentication.")
+    log.debug("CivCalNYC successful authentication.")
 
     return {"title": INTEGRATION_NAME}
 
 
-class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):  # type: ignore
     """Handle a config flow for NYC 311 Public Services Calendar."""
 
     VERSION = 1
@@ -65,7 +66,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             except InvalidAuth:
                 errors["base"] = "invalid_auth"
             except Exception:  # pylint: disable=broad-except
-                _LOGGER.exception("Unexpected exception")
+                log.exception("Unexpected exception")
                 errors["base"] = "unknown"
             else:
                 return self.async_create_entry(title=info["title"], data=user_input)
@@ -75,9 +76,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
 
-class CannotConnect(HomeAssistantError):
+class CannotConnect(HomeAssistantError):  # type: ignore
     """Error to indicate we cannot connect."""
 
 
-class InvalidAuth(HomeAssistantError):
+class InvalidAuth(HomeAssistantError):  # type: ignore
     """Error to indicate there is invalid auth."""

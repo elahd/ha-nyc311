@@ -16,7 +16,7 @@ If you started receiving errors from this integration in April/May 2022, you mus
 
 ## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
 
-## Sensors 
+## Sensors
 
 This component sets up the sensors in the table below for each of the three tracked services (School, Trash, and Parking).
 

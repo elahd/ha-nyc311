@@ -5,18 +5,21 @@ from datetime import timedelta
 import logging
 
 import async_timeout
-from nyc311calendar.api import NYC311API
-
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers import device_registry as dr, entity_registry as er
+from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import UpdateFailed
+from nyc311calendar import CalendarType
+from nyc311calendar import NYC311API
 
-from .const import DOMAIN, INTEGRATION_NAME, STARTUP_MESSAGE
+from .const import DOMAIN
+from .const import INTEGRATION_NAME
+from .const import STARTUP_MESSAGE
 
-_LOGGER = logging.getLogger(__name__)
+log = logging.getLogger(__name__)
 
 PLATFORMS: list[str] = ["sensor", "binary_sensor"]
 
@@ -26,31 +29,33 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     if DOMAIN not in hass.data:
         # Print startup message
-        _LOGGER.info(STARTUP_MESSAGE)
+        log.info(STARTUP_MESSAGE)
 
     # Load data for domain. If not present, initlaize dict for this domain.
     hass.data.setdefault(DOMAIN, {})
 
     api = NYC311API(async_get_clientsession(hass), entry.data["api_key"])
 
-    async def async_update_data():
+    async def async_update_data() -> bool | dict:
         try:
             async with async_timeout.timeout(10):
-                return await api.get_calendar(
-                    [
-                        NYC311API.CalendarTypes.DAYS_AHEAD,
-                        NYC311API.CalendarTypes.NEXT_EXCEPTIONS,
-                    ],
-                    scrub=True,
+                return dict(
+                    await api.get_calendar(
+                        [
+                            CalendarType.DAYS_AHEAD,
+                            CalendarType.NEXT_EXCEPTIONS,
+                        ],
+                        scrub=True,
+                    )
                 )
         except NYC311API.InvalidAuth as err:
             raise ConfigEntryAuthFailed from err
         except NYC311API.CannotConnect as err:
-            raise UpdateFailed(f"Error communicating with API: {err}")
+            raise UpdateFailed("Error communicating with API.") from err
 
     coordinator = DataUpdateCoordinator(
         hass,
-        _LOGGER,
+        log,
         name=DOMAIN,
         update_method=async_update_data,
         update_interval=timedelta(minutes=30),
@@ -82,4 +87,4 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
 
-    return unload_ok
+    return bool(unload_ok)

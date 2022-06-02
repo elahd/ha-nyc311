@@ -1,0 +1,15 @@
+{
+  "folders": [
+    {
+      "path": ".."
+    },
+    {
+      "path": "../../nyc311calendar"
+    }
+  ],
+  "settings": {
+    "files.associations": {
+      "*.yaml": "home-assistant"
+    }
+  }
+}
