@@ -5,9 +5,16 @@
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
 [![hacs][hacsbadge]][hacs]
-![hacs-installs][hacs-installs]
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
+
+---
+---
+
+If you started receiving errors from this integration in April/May 2022, you must update manually using the instructions in <https://github.com/elahd/ha-nyc311/issues/4#issuecomment-1115119826>.
+
+---
+---
 
 ## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
 
@@ -70,6 +77,10 @@ Each sensor has state attributes that give you more detail to play with using Ji
 | Description    | Public schools are closed for Winter Recess through December 31. | Shows full status.                                                                                                                                       |
 | Status         | Suspended                                                        | Shows standardized service statuses. The API returns a mess of statuses. These statuses fit the standard as defined in the nyc311calendar Python module. |
 
+#### Calendars
+
+This integration creates Home Assistant calendar entities for all three services.
+
 ## Requirements
 
 You'll need an NYC API Portal developer account to use this library. It's free.
@@ -92,4 +103,3 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
 [builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg
 [builds]: https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml
-[hacs-installs]: https://img.shields.io/endpoint?url=https%3A%2F%2Flauwbier.nl%2Fhacs%2Fnyc311
