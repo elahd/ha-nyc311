@@ -5,6 +5,7 @@
 [![GitHub Activity][commits-shield]][commits]
 [![License][license-shield]](LICENSE)
 [![hacs][hacsbadge]][hacs]
+![Installs][hacs-installs]
 ![Project Maintenance][maintenance-shield]
 [![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
 
@@ -99,3 +100,4 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 [commits]: https://github.com/elahd/ha-nyc311/commits/master
 [builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg
 [builds]: https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml
+[hacs-installs]: https://img.shields.io/endpoint?url=https%3A%2F%2Flauwbier.nl%2Fhacs%2Fnyc311.svg
