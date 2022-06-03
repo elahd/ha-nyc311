@@ -70,7 +70,7 @@ Each sensor has state attributes that give you more detail to play with using Ji
 | Description    | Public schools are closed for Winter Recess through December 31. | Shows full status.                                                                                                                                       |
 | Status         | Suspended                                                        | Shows standardized service statuses. The API returns a mess of statuses. These statuses fit the standard as defined in the nyc311calendar Python module. |
 
-#### Calendars
+## Calendars
 
 This integration creates Home Assistant calendar entities for all three services.
 
