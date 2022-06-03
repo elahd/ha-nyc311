@@ -23,7 +23,7 @@ class BaseDevice(CoordinatorEntity):  # type: ignore
         coordinator: DataUpdateCoordinator,
         calendar_entry: CalendarDayEntry,
     ):
-        """Pass coordinator to CoordinatorEntity."""
+        """Initialize base device."""
         super().__init__(coordinator)
 
         self.coordinator = coordinator

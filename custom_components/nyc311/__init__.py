@@ -21,7 +21,7 @@ from .const import STARTUP_MESSAGE
 
 log = logging.getLogger(__name__)
 
-PLATFORMS: list[str] = ["sensor", "binary_sensor"]
+PLATFORMS: list[str] = ["sensor", "binary_sensor", "calendar"]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -42,8 +42,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
                 return dict(
                     await api.get_calendar(
                         [
-                            CalendarType.DAYS_AHEAD,
+                            CalendarType.WEEK_AHEAD,
                             CalendarType.NEXT_EXCEPTIONS,
+                            CalendarType.QUARTER_AHEAD,
                         ],
                         scrub=True,
                     )
