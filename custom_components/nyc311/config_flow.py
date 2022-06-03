@@ -37,7 +37,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
 
     # Return info that you want to store in the config entry.
     # return {"api_key": data["api_key"]}
-    log.debug("CivCalNYC successful authentication.")
+    log.debug("API authenticated successfully.")
 
     return {"title": INTEGRATION_NAME}
 

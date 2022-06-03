@@ -42,7 +42,7 @@ async def async_setup_entry(
                 calendar_entry=calendar_entry,
             )
             for day_delta_from_today, day_attributes in coordinator.data[
-                CalendarType.DAYS_AHEAD
+                CalendarType.WEEK_AHEAD
             ].items()
             for calendar_entry in day_attributes["services"].values()
         ),
@@ -93,7 +93,7 @@ class DaysAheadSensor(BaseDevice, BinarySensorEntity):  # type: ignore
         """Update the entity when coordinator is updated."""
 
         self._calendar_entry: CalendarDayEntry = self.coordinator.data[
-            CalendarType.DAYS_AHEAD
+            CalendarType.WEEK_AHEAD
         ][self._delta_from_today]["services"][
             self._calendar_entry.service_profile.service_type
         ]
