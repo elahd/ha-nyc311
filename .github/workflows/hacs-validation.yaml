@@ -8,6 +8,7 @@ on:
 
 jobs:
   validate:
+    name: HASS and Hassfest Validation
     runs-on: "ubuntu-latest"
     steps:
         - uses: "actions/checkout@v3"
@@ -22,7 +23,7 @@ jobs:
 
   style:
     runs-on: "ubuntu-latest"
-    name: Check style formatting
+    name: Check Code Style
     steps:
         - uses: "actions/checkout@v2"
         - uses: "actions/setup-python@v1"
