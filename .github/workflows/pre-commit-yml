@@ -1,0 +1,15 @@
+name: Run Pre-Commit Validation
+
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  validate:
+    name: Pre-Commit
+    runs-on: "ubuntu-latest"
+    steps:
+        - name: pre-commit
+          uses: pre-commit/action@v3.0.0
