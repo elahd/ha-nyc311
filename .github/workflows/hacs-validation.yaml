@@ -1,4 +1,4 @@
-name: HACS Validation
+name: HACS and Hassfest Validation
 
 on:
   pull_request:
