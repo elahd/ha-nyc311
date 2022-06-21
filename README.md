@@ -11,6 +11,10 @@
 
 ## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
 
+![nyc311-sensors](https://user-images.githubusercontent.com/466460/174864932-94dc72d8-b903-4448-b9c7-9868bd7282fa.png)
+
+![nyc311-calendar](https://user-images.githubusercontent.com/466460/174862406-ba45d197-536c-422d-a13a-a9e7c1b6ebc4.png)
+
 ## Sensors
 
 This component sets up the sensors in the table below for each of the three tracked services (School, Trash, and Parking).
