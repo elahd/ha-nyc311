@@ -1,15 +1,26 @@
-# NYC 311 Public Services Calendar
+<p align="center"><img src="https://user-images.githubusercontent.com/466460/175758458-de1f65ca-8fb9-4519-a7af-9ed04d287399.png" width="125"></a>
+<h1 align="center">NYC 311 Public Services Calendar</h1>
+<h3 align="center">Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.</h3>
+<br />
+<p align="center">
+  <a href="https://www.codacy.com/gh/elahd/ha-nyc311/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=elahd/ha-nyc311&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/f0ea7693d5424bd6acabf70e8779dfa2"/></a>
+  <a href="https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml"><img src="https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg" /></a>
+  <a href="https://results.pre-commit.ci/latest/github/elahd/ha-nyc311/main"><img src="https://results.pre-commit.ci/badge/github/elahd/ha-nyc311/main.svg" /></a>
+  <a href="https://github.com/elahd/ha-nyc311/commits/master"><img src="https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg" /></a>
+  <a href="https://www.buymeacoffee.com/elahd"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/hacs/integration"><img src="https://img.shields.io/badge/HACS-Default-41BDF5.svg" /></a>
+  <img src="https://img.shields.io/endpoint?url=https%3A%2F%2Flauwbier.nl%2Fhacs%2Fnyc311" />
+  <a href="https://github.com/elahd/ha-nyc311/releases"><img src="https://img.shields.io/github/release/elahd/ha-nyc311.svg" /></a>
+  <a href="https://github.com/elahd/ha-nyc311/blob/main/LICENSE"><img alt="GitHub" src="https://img.shields.io/github/license/elahd/ha-nyc311"></a>
+  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" /></a>
+  <a href="https://github.com/PyCQA/pylint"><img src="https://img.shields.io/badge/linting-pylint-yellowgreen" /></a>
+</p>
 
-[![GitHub Workflow Status][builds-shield]][builds]
-[![GitHub Release][releases-shield]][releases]
-[![GitHub Activity][commits-shield]][commits]
-[![License][license-shield]](LICENSE)
-[![hacs][hacsbadge]][hacs]
-![hacs-installs][hacs-installs]
-![Project Maintenance][maintenance-shield]
-[![BuyMeCoffee][buymecoffeebadge]][buymecoffee]
+<hr />
 
-## **Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.**
+## Screenshots
 
 ![nyc311-sensors](https://user-images.githubusercontent.com/466460/174864932-94dc72d8-b903-4448-b9c7-9868bd7282fa.png)
 
@@ -87,17 +98,3 @@ You'll need an NYC API Portal developer account to use this library. It's free.
 3. Get your API key at <https://api-portal.nyc.gov/developer>. Either key (primary/secondary) will work.
 
 **Component configuration is done via Home Assistant's integration's UI.** Enter your API key there during component setup.
-
-[buymecoffee]: https://www.buymeacoffee.com/elahd
-[buymecoffeebadge]: https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg
-[hacs]: https://github.com/hacs/integration
-[hacsbadge]: https://img.shields.io/badge/HACS-Default-41BDF5.svg
-[license-shield]: https://img.shields.io/github/license/elahd/ha-nyc311.svg
-[maintenance-shield]: https://img.shields.io/badge/Maintainer-Elahd%20Bar--Shai%20%40elahd-blue.svg
-[releases-shield]: https://img.shields.io/github/release/elahd/ha-nyc311.svg
-[releases]: https://github.com/elahd/ha-nyc311/releases
-[commits-shield]: https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg
-[commits]: https://github.com/elahd/ha-nyc311/commits/master
-[builds-shield]: https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg
-[builds]: https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml
-[hacs-installs]: https://img.shields.io/endpoint?url=https%3A%2F%2Flauwbier.nl%2Fhacs%2Fnyc311
