@@ -1,2 +1,2 @@
-pre-commit==2.19.0
+pre-commit==2.20.0
 pylint_strict_informational==0.1
