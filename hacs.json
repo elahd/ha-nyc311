@@ -1,3 +1,5 @@
 {
-  "name": "NYC 311 Public Services Calendar"
+  "name": "NYC 311 Public Services Calendar",
+  "render_readme": true,
+  "content_in_root": false
 }
