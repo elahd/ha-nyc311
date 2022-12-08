@@ -1,5 +1,5 @@
 {
-  "image": "ghcr.io/ludeeus/devcontainer/integration:stable",
+  "image": "ghcr.io/ludeeus/devcontainer/integration:latest",
   "name": "ha-nyc311",
   "features": {
     "github-cli": "latest"
