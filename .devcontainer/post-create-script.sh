@@ -17,4 +17,5 @@ else
     echo "nyc311calendar repository directory already exists."
 fi
 
-python /workspaces/nyc311calendar/setup.py develop
+cd /workspaces/nyc311calendar
+python setup.py develop
