@@ -19,3 +19,5 @@ fi
 
 cd /workspaces/nyc311calendar
 python setup.py develop
+
+pip install -r /workspaces/nyc311calendar/requirements-dev.txt
