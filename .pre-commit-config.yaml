@@ -87,3 +87,4 @@ repos:
         args:
           - --output-format=colorized
           - -d W0511
+          - --fail-on=all

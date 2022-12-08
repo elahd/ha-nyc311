@@ -18,6 +18,7 @@
   "python.linting.mypyPath": "/usr/local/python/bin/mypy",
   "python.linting.pycodestylePath": "/usr/local/python/bin/pycodestyle",
   "python.linting.pylintPath": "/usr/local/python/bin/pylint",
-  "python.sortImports.path": "/usr/local/python/bin/isort",
-  "npm.autoDetect": "off"
+  "isort.path": ["/usr/local/python/bin/isort"],
+  "npm.autoDetect": "off",
+  "python.analysis.extraPaths": ["/workspaces/nyc311calendar"]
 }

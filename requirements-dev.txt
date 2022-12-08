@@ -1,2 +1,2 @@
 pre-commit==2.20.0
-pylint_strict_informational==0.1
+pylint==2.12.2
