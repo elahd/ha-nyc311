@@ -5,21 +5,18 @@ import datetime
 import logging
 
 from homeassistant import core
-from homeassistant.components.calendar import CalendarEntity
-from homeassistant.components.calendar import CalendarEvent
+from homeassistant.components.calendar import CalendarEntity, CalendarEvent
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import callback
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.entity_platform import DiscoveryInfoType
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-from nyc311calendar import CalendarDayEntry
-from nyc311calendar import CalendarType
-from nyc311calendar import GroupBy
-from nyc311calendar.services import Service
-from nyc311calendar.services import ServiceType
+from homeassistant.helpers.entity_platform import AddEntitiesCallback, DiscoveryInfoType
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
+
+from nyc311calendar import CalendarDayEntry, CalendarType, GroupBy
+from nyc311calendar.services import Service, ServiceType
 
 from .const import DOMAIN
 

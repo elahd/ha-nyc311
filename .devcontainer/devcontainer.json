@@ -6,10 +6,12 @@
   },
   "containerEnv": {
     "WORKSPACE_DIRECTORY": "/workspaces/ha-nyc311",
-    "POST_SET_VERSION_HOOK": "/workspaces/ha-nyc311/.devcontainer/post-set-version-hook.sh"
+    "POST_SET_VERSION_HOOK": "/workspaces/ha-nyc311/.devcontainer/post-set-version-hook.sh",
+    "INTEGRATION_NAME": "nyc311",
+    "LIBRARY_NAME": "nyc311calendar",
+    "LIBRARY_GIT_URL": "https://github.com/elahd/nyc311calendar.git"
   },
-  "postCreateCommand": "chmod +x /workspaces/ha-nyc311/.devcontainer/post-create-script.sh && sh /workspaces/ha-nyc311/.devcontainer/post-create-script.sh",
-  "appPort": ["8123:8123"],
+  "postCreateCommand": "chmod +x /${containerEnv:WORKSPACE_DIRECTORY}/.devcontainer/post-create-script.sh && bash /${containerEnv:WORKSPACE_DIRECTORY}/.devcontainer/post-create-script.sh",
   "extensions": [
     "ms-python.vscode-pylance",
     "github.vscode-pull-request-github",

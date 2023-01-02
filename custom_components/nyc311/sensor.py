@@ -5,14 +5,12 @@ import logging
 import re
 
 from homeassistant import core
-from homeassistant.components.sensor import SensorDeviceClass
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.entity_platform import DiscoveryInfoType
+from homeassistant.helpers.entity_platform import AddEntitiesCallback, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-from nyc311calendar import CalendarDayEntry
-from nyc311calendar import CalendarType
+
+from nyc311calendar import CalendarDayEntry, CalendarType
 
 from .base_device import BaseDevice
 from .const import DOMAIN
@@ -54,7 +52,10 @@ class NextExceptionSensor(BaseDevice, SensorEntity):  # type: ignore
         """Initialize next exception sensor."""
         super().__init__(coordinator=coordinator, calendar_entry=calendar_entry)
 
-        self._attr_name = f"Next {self._calendar_entry.service_profile.name} {self._calendar_entry.service_profile.exception_name}"
+        self._attr_name = (
+            "Next"
+            f" {self._calendar_entry.service_profile.name} {self._calendar_entry.service_profile.exception_name}"
+        )
         self._attr_unique_id = re.sub(" ", "_", self._attr_name).lower()
 
     def update_device_data(self) -> None:

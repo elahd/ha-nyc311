@@ -1,8 +1,7 @@
 """Binary sensor API entity."""
 from __future__ import annotations
 
-from datetime import date
-from datetime import datetime
+from datetime import date, datetime
 import logging
 from typing import Literal
 
@@ -10,16 +9,14 @@ from homeassistant import core
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
-from homeassistant.helpers.entity_platform import DiscoveryInfoType
+from homeassistant.helpers.entity_platform import AddEntitiesCallback, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-from nyc311calendar import CalendarDayEntry
-from nyc311calendar import CalendarType
+
+from nyc311calendar import CalendarDayEntry, CalendarType
 from nyc311calendar.services import Service
 
 from .base_device import BaseDevice
-from .const import DAY_NAMES
-from .const import DOMAIN
+from .const import DAY_NAMES, DOMAIN
 
 log = logging.getLogger(__name__)
 
@@ -77,7 +74,10 @@ class DaysAheadSensor(BaseDevice, BinarySensorEntity):  # type: ignore
         self._delta_from_today: int = day_delta_from_today
 
         # Set name here to lock in entity ID with _in_x_days suffix.
-        self._attr_name = f"NYC311 {self._generate_name(service_name=calendar_entry.service_profile.name,delta_from_today=self._delta_from_today,calendar_entry_date=calendar_entry.date)}"
+        self._attr_name = (
+            "NYC311"
+            f" {self._generate_name(service_name=calendar_entry.service_profile.name,delta_from_today=self._delta_from_today,calendar_entry_date=calendar_entry.date)}"
+        )
 
         self._attr_unique_id = (
             self._generate_name(

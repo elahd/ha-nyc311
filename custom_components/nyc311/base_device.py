@@ -3,12 +3,14 @@ from __future__ import annotations
 
 from homeassistant.core import callback
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+)
+
 from nyc311calendar import CalendarDayEntry
 
-from .const import DOMAIN
-from .const import SERVICE_ICONS
+from .const import DOMAIN, SERVICE_ICONS
 
 
 class BaseDevice(CoordinatorEntity):  # type: ignore
@@ -34,7 +36,9 @@ class BaseDevice(CoordinatorEntity):  # type: ignore
 
     def _get_icon(self, active_exception: bool) -> str:
         """Get icon for a given service / state."""
-        return f"{SERVICE_ICONS[self._calendar_entry.service_profile.service_type]}{'' if active_exception else '-off'}"
+        return (
+            f"{SERVICE_ICONS[self._calendar_entry.service_profile.service_type]}{'' if active_exception else '-off'}"
+        )
 
     async def async_added_to_hass(self) -> None:
         """Register callbacks."""

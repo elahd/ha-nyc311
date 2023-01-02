@@ -10,14 +10,11 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-from homeassistant.helpers.update_coordinator import UpdateFailed
-from nyc311calendar import CalendarType
-from nyc311calendar import NYC311API
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import DOMAIN
-from .const import INTEGRATION_NAME
-from .const import STARTUP_MESSAGE
+from nyc311calendar import NYC311API, CalendarType
+
+from .const import DOMAIN, INTEGRATION_NAME, STARTUP_MESSAGE
 
 log = logging.getLogger(__name__)
 
