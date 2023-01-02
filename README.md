@@ -4,7 +4,7 @@
 <br />
 <p align="center">
   <a href="https://www.codacy.com/gh/elahd/ha-nyc311/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=elahd/ha-nyc311&amp;utm_campaign=Badge_Grade"><img src="https://app.codacy.com/project/badge/Grade/f0ea7693d5424bd6acabf70e8779dfa2"/></a>
-  <a href="https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml"><img src="https://img.shields.io/github/workflow/status/elahd/ha-nyc311/HACS%20Validation.svg" /></a>
+  <a href="https://github.com/elahd/ha-nyc311/actions/workflows/hacs-validation.yaml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/elahd/ha-nyc311/hacs-validation.yaml"></a>
   <a href="https://results.pre-commit.ci/latest/github/elahd/ha-nyc311/main"><img src="https://results.pre-commit.ci/badge/github/elahd/ha-nyc311/main.svg" /></a>
   <a href="https://github.com/elahd/ha-nyc311/commits/master"><img src="https://img.shields.io/github/commit-activity/y/elahd/ha-nyc311.svg" /></a>
   <a href="https://www.buymeacoffee.com/elahd"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-yellow.svg"></a>
