@@ -33,6 +33,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     api = NYC311API(async_get_clientsession(hass), entry.data["api_key"])
 
     async def async_update_data() -> bool | dict:
+        """Get fresh data from API."""
         try:
             async with async_timeout.timeout(10):
                 return dict(
