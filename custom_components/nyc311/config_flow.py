@@ -9,9 +9,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
-import voluptuous as vol
-
 from nyc311calendar import NYC311API, CalendarType
+import voluptuous as vol
 
 from .const import DOMAIN, INTEGRATION_NAME
 

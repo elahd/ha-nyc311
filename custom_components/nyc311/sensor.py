@@ -9,7 +9,6 @@ from homeassistant.components.sensor import SensorDeviceClass, SensorEntity
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-
 from nyc311calendar import CalendarDayEntry, CalendarType
 
 from .base_device import BaseDevice

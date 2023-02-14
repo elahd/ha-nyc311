@@ -1,3 +1,5 @@
+# File Version: 2023.01.27
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +129,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# MonkeyType
+monkeytype.sqlite3
+
+test.py
+*.ignore.*

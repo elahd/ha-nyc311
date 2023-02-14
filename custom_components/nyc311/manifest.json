@@ -1,15 +1,19 @@
 {
   "domain": "nyc311",
   "name": "NYC 311 Public Services Calendar",
+  "codeowners": [
+    "@elahd"
+  ],
   "config_flow": true,
-  "documentation": "https://www.github.com/elahd/ha-nyc311",
-  "issue_tracker": "https://www.github.com/elahd/ha-nyc311/issues",
-  "requirements": ["nyc311calendar==v0.4.1"],
-  "ssdp": [],
-  "zeroconf": [],
-  "homekit": {},
   "dependencies": [],
-  "codeowners": ["@elahd"],
+  "documentation": "https://www.github.com/elahd/ha-nyc311",
+  "homekit": {},
   "iot_class": "cloud_polling",
-  "version": "v0.1.3"
+  "issue_tracker": "https://www.github.com/elahd/ha-nyc311/issues",
+  "requirements": [
+    "nyc311calendar==v0.4.1"
+  ],
+  "ssdp": [],
+  "version": "v0.1.3",
+  "zeroconf": []
 }

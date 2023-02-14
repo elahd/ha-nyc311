@@ -11,7 +11,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity import DeviceInfo
 from homeassistant.helpers.entity_platform import AddEntitiesCallback, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
-
 from nyc311calendar import CalendarDayEntry, CalendarType
 from nyc311calendar.services import Service
 
