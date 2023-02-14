@@ -7,7 +7,6 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
-
 from nyc311calendar import CalendarDayEntry
 
 from .const import DOMAIN, SERVICE_ICONS

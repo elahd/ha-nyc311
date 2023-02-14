@@ -14,7 +14,6 @@ from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
 )
-
 from nyc311calendar import CalendarDayEntry, CalendarType, GroupBy
 from nyc311calendar.services import Service, ServiceType
 

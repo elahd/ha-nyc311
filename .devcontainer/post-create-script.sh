@@ -1,3 +1,5 @@
+# File Version: 2023.01.27
+
 #!/usr/bin/env bash
 
 if [ -z "${LIBRARY_NAME}" ] || [ -z "${LIBRARY_GIT_URL}" ] || [ -z "${WORKSPACE_DIRECTORY}" ]; then
@@ -102,7 +104,7 @@ fi
 
 "$workspace_dir"/.devcontainer/post-set-version-hook.sh "$ha_version"
 
-/workspaces/core/script/setup
+bash /workspaces/core/script/setup
 
 cat << EOF
 

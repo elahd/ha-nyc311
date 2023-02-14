@@ -4,7 +4,10 @@
   "python.analysis.autoSearchPaths": false,
   "python.linting.pylintEnabled": true,
   "python.linting.enabled": true,
-  "python.linting.pylintArgs": ["--disable", "import-error"],
+  "python.linting.pylintArgs": [
+    "--disable",
+    "import-error"
+  ],
   "python.formatting.provider": "black",
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
@@ -18,10 +21,17 @@
   "python.linting.mypyPath": "/usr/local/python/bin/mypy",
   "python.linting.pycodestylePath": "/usr/local/python/bin/pycodestyle",
   "python.linting.pylintPath": "/usr/local/python/bin/pylint",
-  "isort.path": ["/usr/local/python/bin/isort"],
-  "python.analysis.extraPaths": ["/workspaces/ha-nyc311"],
+  "isort.path": [
+    "/usr/local/python/bin/isort"
+  ],
+  "python.analysis.extraPaths": [
+    "/workspaces/pyalarmdotcomajax"
+  ],
   "npm.autoDetect": "off",
   "files.associations": {
     "*.yaml": "home-assistant"
-  }
+  },
+  "git.ignoredRepositories": [
+    "/workspaces/core"
+  ]
 }
