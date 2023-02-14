@@ -48,7 +48,6 @@ class BaseDevice(CoordinatorEntity):  # type: ignore
     @callback  # type: ignore
     def _handle_coordinator_update(self) -> None:
         """Update the entity with new REST API data."""
-
         self.update_device_data()
 
         reason = self._calendar_entry.exception_reason

@@ -80,7 +80,6 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
         end_date: datetime.datetime,
     ) -> list[CalendarEvent]:
         """Return calendar events within a datetime range."""
-
         events = self._build_calendar(start_date=start_date, end_date=end_date)
 
         return events if isinstance(events, list) else []
@@ -88,7 +87,6 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
     @property
     def event(self) -> CalendarEvent | None:
         """Return the next upcoming event."""
-
         event = self._build_calendar(next_event=True)
 
         return event if isinstance(event, CalendarEvent) else None
@@ -102,7 +100,6 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
     @callback  # type: ignore
     def _handle_coordinator_update(self) -> None:
         """Update the entity with new REST API data."""
-
         self.update_device_data()
 
         self.async_write_ha_state()
@@ -110,7 +107,6 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
     @callback  # type: ignore
     def update_device_data(self) -> None:
         """Update the entity when new data comes from the API."""
-
         self._calendar = self.coordinator.data[CalendarType.QUARTER_AHEAD][
             GroupBy.SERVICE
         ][self._service]
@@ -123,9 +119,7 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
         next_event: bool = False,
     ) -> list[CalendarEvent] | CalendarEvent:
         """Build HA-standard calendar."""
-
         # next_event: if true, returns the next exception for this calendar. if false, returns all exceptions between start and end date, exclusive.
-
         if (next_event and (start_date or end_date)) or (
             bool(start_date) ^ bool(end_date)
         ):

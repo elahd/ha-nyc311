@@ -59,7 +59,6 @@ class NextExceptionSensor(BaseDevice, SensorEntity):  # type: ignore
 
     def update_device_data(self) -> None:
         """Update the entity when coordinator is updated."""
-
         self._calendar_entry: CalendarDayEntry = self.coordinator.data[
             CalendarType.NEXT_EXCEPTIONS
         ][self._calendar_entry.service_profile.service_type]

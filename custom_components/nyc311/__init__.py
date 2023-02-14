@@ -22,7 +22,6 @@ PLATFORMS: list[str] = ["sensor", "binary_sensor", "calendar"]
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up NYC 311 Public Services Calendar from a config entry."""
-
     if DOMAIN not in hass.data:
         # Print startup message
         log.info(STARTUP_MESSAGE)

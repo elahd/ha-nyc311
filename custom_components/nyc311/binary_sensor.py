@@ -90,7 +90,6 @@ class DaysAheadSensor(BaseDevice, BinarySensorEntity):  # type: ignore
 
     def update_device_data(self) -> None:
         """Update the entity when coordinator is updated."""
-
         self._calendar_entry: CalendarDayEntry = self.coordinator.data[
             CalendarType.WEEK_AHEAD
         ][self._delta_from_today]["services"][
@@ -147,7 +146,6 @@ class DaysAheadSensor(BaseDevice, BinarySensorEntity):  # type: ignore
         day_of_week_fmt: bool = False,  # True for name, False for unique ID.
     ) -> str:
         """Generate entity name and unique ID."""
-
         if day_of_week_fmt and delta_from_today > 1:
             # On Wednesday
             day_name = datetime.combine(
