@@ -14,6 +14,6 @@
     "nyc311calendar==v0.4.1"
   ],
   "ssdp": [],
-  "version": "v0.1.4",
+  "version": "v0.1.5",
   "zeroconf": []
 }
