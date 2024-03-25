@@ -1,4 +1,5 @@
 """Base for NYC311 entities."""
+
 from __future__ import annotations
 
 from homeassistant.core import callback
@@ -35,9 +36,7 @@ class BaseDevice(CoordinatorEntity):  # type: ignore
 
     def _get_icon(self, active_exception: bool) -> str:
         """Get icon for a given service / state."""
-        return (
-            f"{SERVICE_ICONS[self._calendar_entry.service_profile.service_type]}{'' if active_exception else '-off'}"
-        )
+        return f"{SERVICE_ICONS[self._calendar_entry.service_profile.service_type]}{'' if active_exception else '-off'}"
 
     async def async_added_to_hass(self) -> None:
         """Register callbacks."""
