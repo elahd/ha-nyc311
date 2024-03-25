@@ -1,4 +1,5 @@
 """The NYC 311 Public Services Calendar integration."""
+
 from __future__ import annotations
 
 from datetime import timedelta
