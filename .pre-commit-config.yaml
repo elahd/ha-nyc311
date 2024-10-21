@@ -7,22 +7,22 @@ ci:
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.18.0
     hooks:
       - id: pyupgrade
         args: [--py39-plus]
   - repo: https://github.com/PyCQA/isort
-    rev: 5.12.0
+    rev: 5.13.2
     hooks:
       - id: isort
         files: ^((custom_components)/.+)?[^/]+\.py$
   - repo: https://github.com/myint/autoflake/
-    rev: v2.0.1
+    rev: v2.3.1
     hooks:
       - id: autoflake
         files: ^((custom_components)/.+)?[^/]+\.py$
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 24.10.0
     hooks:
       - id: black
         args:
@@ -30,7 +30,7 @@ repos:
           - --quiet
         files: ^((custom_components)/.+)?[^/]+\.py$
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.2
+    rev: v2.3.0
     hooks:
       - id: codespell
         args:
@@ -39,7 +39,7 @@ repos:
           - --quiet-level=2
         exclude_types: [csv, json]
   - repo: https://github.com/PyCQA/flake8
-    rev: 6.0.0
+    rev: 7.1.1
     hooks:
       - id: flake8
         additional_dependencies:
@@ -48,7 +48,7 @@ repos:
           - Flake8-pyproject==1.2.2
         files: ^((custom_components)/.+)?[^/]+\.py$
   - repo: https://github.com/PyCQA/bandit
-    rev: 1.7.4
+    rev: 1.7.10
     hooks:
       - id: bandit
         args:
@@ -59,7 +59,7 @@ repos:
         additional_dependencies: ["bandit[toml]"]
         files: ^((custom_components)/.+)?[^/]+\.py$
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -68,17 +68,17 @@ repos:
       - id: check-json
         exclude: (.vscode|.devcontainer)
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.0.0
+    rev: v1.12.1
     hooks:
       - id: mypy
         additional_dependencies: [types-all]
   - repo: https://github.com/adrienverge/yamllint.git
-    rev: v1.29.0
+    rev: v1.35.1
     hooks:
       - id: yamllint
         exclude: (.vscode|.devcontainer|.github)
   - repo: https://github.com/pappasam/toml-sort
-    rev: v0.22.3
+    rev: v0.23.1
     hooks:
       - id: toml-sort
         args: []
