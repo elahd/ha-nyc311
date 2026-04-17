@@ -6,21 +6,19 @@ DOMAIN = "nyc311"
 ISSUE_URL = "https://github.com/elahd/hass-nyc311/issues"
 INTEGRATION_NAME = "NYC 311 Public Services Calendar"
 
-STARTUP_MESSAGE = f"""
+# Using a raw string and a single variable to prevent linter confusion
+LOGO = r"""
 ===================================================================
- @@@@    *@@@ ,@@@     @@@   ,@@@@@@@@
+ @@@@   *@@@ ,@@@      @@@   ,@@@@@@@@
 @@@@@@@  @@@@@@@@@@   @@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@@@@@@@@@@ @@@@@@@@@@@ @@@@@
 @@@@@ @@@@@@@@    @@@@@    @@@@@@@@@@@@@
 @@@@@   &@@@@@    @@@@@     %@@@@@@@@@@
-
-{DOMAIN}
-This is a custom component
-If you have any issues with this you need to open an issue here:
-{ISSUE_URL}
 ===================================================================
 """
+
+STARTUP_MESSAGE = f"{LOGO}\n{DOMAIN}\nThis is a custom component\nIssues: {ISSUE_URL}"
 
 SERVICE_ICONS = {
     ServiceType.PARKING: "mdi:car",
