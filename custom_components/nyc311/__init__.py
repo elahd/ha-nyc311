@@ -1,7 +1,7 @@
 """The NYC 311 Public Services Calendar integration."""
 from __future__ import annotations
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 import logging
 
 import async_timeout
@@ -10,6 +10,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.event import async_track_time_change
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from nyc311calendar import NYC311API, CalendarType
 
@@ -69,6 +70,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_config_entry_first_refresh()
+
+    async def midnight_refresh(now: datetime) -> None:
+        """Refresh relative-day sensors when the New York calendar day changes."""
+        await coordinator.async_request_refresh()
+
+    # Register cleanup with the config entry so reloads cannot leak listeners.
+    entry.async_on_unload(
+        async_track_time_change(
+            hass, midnight_refresh, hour=0, minute=0, second=1
+        )
+    )
 
     # Store coordinator
     hass.data[DOMAIN][entry.entry_id] = coordinator

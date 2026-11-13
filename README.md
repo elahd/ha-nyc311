@@ -1,3 +1,9 @@
+> **Date rollover fix fork:** Install `aniceberg/ha-nyc311` as a HACS custom integration repository. This fork keeps the `nyc311` domain and entity unique IDs so existing configuration and automations can be reused. Back up your current `custom_components/nyc311` directory before replacing it, and fully restart Home Assistant after installation.
+>
+> Fixes the import-time date freeze in the calendar dependency, refreshes relative sensors at midnight, skips expired calendar events, and uses exclusive next-day end dates for all-day events. The dependency is pinned to an immutable commit of the fixed library fork until an upstream release incorporates the fix. No NYC API key or configuration is included in this repository.
+>
+> Midnight scheduling follows Home Assistant's configured local timezone; use `America/New_York` for NYC service dates. Calendar date calculations use New York time.
+
 <p align="center"><img src="https://user-images.githubusercontent.com/466460/175758458-de1f65ca-8fb9-4519-a7af-9ed04d287399.png" width="125"></a>
 <h1 align="center">NYC 311 Public Services Calendar</h1>
 <h3 align="center">Home Assistant integration for New York City trash collection, school, and alternate side parking schedules.</h3>

@@ -17,6 +17,8 @@ from homeassistant.helpers.update_coordinator import (
 from nyc311calendar import CalendarDayEntry, CalendarType, GroupBy
 from nyc311calendar.services import Service, ServiceType
 
+from nyc311calendar.util import today
+
 from .const import DOMAIN
 
 log = logging.getLogger(__name__)
@@ -58,7 +60,7 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
         self.coordinator = coordinator
         self._service = service
 
-        self._calendar: CalendarDayEntry = {}
+        self._calendar: dict[datetime.date, CalendarDayEntry] = {}
 
         # Hack to pluralize NYC Schools
         self._attr_name = (
@@ -117,7 +119,7 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
         start_date: datetime.datetime | None = None,
         end_date: datetime.datetime | None = None,
         next_event: bool = False,
-    ) -> list[CalendarEvent] | CalendarEvent:
+    ) -> list[CalendarEvent] | CalendarEvent | None:
         """Build HA-standard calendar."""
         # next_event: if true, returns the next exception for this calendar. if false, returns all exceptions between start and end date, exclusive.
         if (next_event and (start_date or end_date)) or (
@@ -129,6 +131,8 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
 
         for date_ in sorted(self._calendar):
             calendar_entry: CalendarDayEntry = self._calendar[date_]
+            if next_event and calendar_entry.date < today():
+                continue
             if (
                 calendar_entry.status_profile.standardized_type
                 in [
@@ -148,7 +152,7 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
 
             calendar_event = CalendarEvent(
                 start=calendar_entry.date,
-                end=calendar_entry.date,
+                end=calendar_entry.date + datetime.timedelta(days=1),
                 summary=calendar_entry.exception_summary,
                 description=calendar_entry.raw_description,
             )
@@ -158,4 +162,4 @@ class Calendar(CalendarEntity, CoordinatorEntity):  # type: ignore
 
             calendar_events.append(calendar_event)
 
-        return calendar_events
+        return None if next_event else calendar_events

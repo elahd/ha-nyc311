@@ -6,14 +6,14 @@
   ],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://www.github.com/elahd/ha-nyc311",
+  "documentation": "https://github.com/aniceberg/ha-nyc311",
   "homekit": {},
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://www.github.com/elahd/ha-nyc311/issues",
+  "issue_tracker": "https://github.com/aniceberg/ha-nyc311/issues",
   "requirements": [
-    "nyc311calendar==v0.4.1"
+    "nyc311calendar @ https://github.com/aniceberg/nyc311calendar/archive/ead0c9aa52a7dc85d3a8d0e8fff29ddfaadbdac2.zip"
   ],
   "ssdp": [],
-  "version": "v0.1.5",
+  "version": "0.1.6",
   "zeroconf": []
 }
