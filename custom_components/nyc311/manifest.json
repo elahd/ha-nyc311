@@ -11,7 +11,7 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/aniceberg/ha-nyc311/issues",
   "requirements": [
-    "nyc311calendar @ https://github.com/aniceberg/nyc311calendar/archive/ead0c9aa52a7dc85d3a8d0e8fff29ddfaadbdac2.zip"
+    "nyc311calendar@https://github.com/aniceberg/nyc311calendar/archive/ead0c9aa52a7dc85d3a8d0e8fff29ddfaadbdac2.zip"
   ],
   "ssdp": [],
   "version": "0.1.6",
